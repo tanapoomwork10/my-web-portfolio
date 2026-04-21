@@ -5,26 +5,14 @@
 
 // ════════════════════════════════════════
 //  INJECT IMAGES INTO DOM
+//  Reads [data-img] on every <img> and sets src from IMGS object
 // ════════════════════════════════════════
 function injectImages() {
-  const set = (sel, key) => {
-    const els = document.querySelectorAll(sel);
-    els.forEach(el => { if (IMGS[key]) el.src = IMGS[key]; });
-  };
-  // Hero photos
-  const heroPhotos = document.querySelectorAll('.hero-photo-card img');
-  if (heroPhotos[0] && IMGS.photo1) heroPhotos[0].src = IMGS.photo1;
-  if (heroPhotos[1] && IMGS.photo2) heroPhotos[1].src = IMGS.photo2;
-  // Project cards & modals
-  document.querySelectorAll('[src$="_PLACEHOLDER"]').forEach(el => {
-    const key = el.src.split('/').pop().replace('_PLACEHOLDER','').toLowerCase();
-    if (IMGS[key]) el.src = IMGS[key];
-  });
-  // Cert images
-  ['c1','c2','c3'].forEach((k,i)=>{
-    const ids = ['certImg-aws','certImg-ux','certImg-bot'];
-    const el = document.getElementById(ids[i]);
-    if (el && IMGS[k]) el.src = IMGS[k];
+  document.querySelectorAll('img[data-img]').forEach(el => {
+    const key = el.dataset.img;
+    if (IMGS && IMGS[key]) {
+      el.src = IMGS[key];
+    }
   });
 }
 
