@@ -1,0 +1,166 @@
+/* ============================================================
+   NAV & HERO
+   Sticky navbar, hero section, photo card, marquee ticker
+   ============================================================ */
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  height: 62px;
+  display: flex; align-items: center;
+  padding: 0 2.5rem; gap: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border-bottom: 1px solid var(--bdr);
+  transition: background .4s;
+}
+.brand {
+  font-family: "Syne", sans-serif;
+  font-weight: 800; font-size: 1.05rem; letter-spacing: -.03em;
+  flex-shrink: 0;
+}
+.brand span { color: var(--cyan); }
+.nav-center {
+  display: flex; align-items: center; gap: 0;
+  flex: 1; justify-content: center;
+}
+.nl {
+  background: none; border: none;
+  color: var(--t2);
+  font-family: "Syne", sans-serif; font-size: .83rem; font-weight: 600;
+  padding: 8px 16px; border-radius: 8px;
+  cursor: pointer; transition: color .2s, background .2s;
+  position: relative;
+}
+/* Colored accent on hover & active */
+.nl-about:hover,    .nl-about.active    { color: #00E5FF; background: rgba(0,229,255,.08); }
+.nl-projects:hover, .nl-projects.active { color: #8B5CF6; background: rgba(139,92,246,.08); }
+.nl-edu:hover,      .nl-edu.active      { color: #10B981; background: rgba(16,185,129,.08); }
+.nl-skills:hover,   .nl-skills.active   { color: #F59E0B; background: rgba(245,158,11,.08); }
+.nl-terminal:hover, .nl-terminal.active { color: #EC4899; background: rgba(236,72,153,.08); }
+.nl.active { font-weight: 700; }
+[data-theme="light"] .nl:hover { filter: brightness(.85); }
+.nav-r { display: none; }  /* Vision moved below photo */
+.nav-cta { display: none; }
+.theme-toggle {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--bdr);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; cursor: pointer; transition: all .2s;
+  flex-shrink: 0; margin-left: 6px;
+}
+.theme-toggle:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  min-height:100vh; display:flex;
+  align-items:center;              /* vertically center everything */
+  padding:8rem clamp(1.5rem,6vw,5rem) 5rem;
+  position:relative; z-index:1;
+  max-width:1300px; margin:0 auto;
+  gap:4rem; flex-wrap:wrap;
+}
+
+/* Left column: text */
+.hero-text { flex:1; min-width:300px; }
+
+.hero-chip {
+  display:inline-flex; align-items:center; gap:.6rem;
+  background:var(--cyan-dim); border:1px solid var(--bdr3);
+  border-radius:100px; padding:6px 18px;
+  font-family:"JetBrains Mono",monospace; font-size:.75rem; font-weight:600;
+  color:var(--cyan); margin-bottom:2rem; width:fit-content;
+  opacity:0; animation:fadeUp .8s ease .1s forwards;
+}
+.hero-chip i {
+  display:inline-block; width:7px; height:7px;
+  border-radius:50%; background:var(--cyan); animation:pulse 2s infinite;
+}
+
+/* ── Headline: gradient does NOT vanish on hover ──
+   Key fix: pointer-events:none on the pseudo-layer,
+   and we DON'T use :hover on the text lines themselves. */
+.hero-h1 {
+  font-size:clamp(2.8rem,8vw,5.8rem);
+  font-weight:800; line-height:1; letter-spacing:-.05em;
+  margin-bottom:.9rem;
+  /* no pointer-events weirdness — hover detection is on .hero-text wrapper */
+  user-select:none;
+}
+.hero-h1 .line {
+  display:block;
+  opacity:0; transform:translateY(50px);
+  animation:fadeUp .9s ease forwards;
+}
+.hero-h1 .line:nth-child(1) { animation-delay:.2s; color:var(--t1); }
+
+/* Gradient lines — ALWAYS visible, gradient is on the element itself */
+.hero-h1 .line.g1 {
+  animation-delay:.35s;
+  background:linear-gradient(135deg, var(--cyan) 0%, var(--purple) 55%, var(--cyan) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:fadeUp .9s ease .35s forwards, gradShift 4s linear infinite;
+  /* CRITICAL: keep animation running always, not on hover */
+}
+.hero-h1 .line.g2 {
+  animation-delay:.5s;
+  background:linear-gradient(135deg, var(--purple) 0%, var(--pink) 50%, var(--amber) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:fadeUp .9s ease .5s forwards, gradShift2 5s linear infinite;
+}
+.hero-h1 .line.thai {
+  animation-delay:.65s;
+  font-size:clamp(1.4rem,3vw,2.2rem); font-weight:700;
+  color:var(--t2); -webkit-text-fill-color:var(--t2);
+  background:none;
+}
+
+.hero-sub {
+  font-size:clamp(.95rem,1.4vw,1.1rem); color:var(--t2);
+  max-width:520px; margin-bottom:2.5rem;
+  opacity:0; animation:fadeUp .8s ease .8s forwards; line-height:1.8;
+}
+.hero-btns {
+  display:flex; gap:1rem; flex-wrap:wrap;
+  opacity:0; animation:fadeUp .8s ease .95s forwards;
+}
+.btn {
+  padding:13px 28px; border-radius:12px;
+  font-family:"Syne",sans-serif; font-size:.88rem;
+  font-weight:700; transition:all .25s; border:none; letter-spacing:-.01em;
+}
+.btn-fill { background:var(--cyan); color:#06070D; }
+.btn-fill:hover { box-shadow:var(--glow-cyan); transform:translateY(-2px); }
+.btn-ghost {
+  background:rgba(255,255,255,.04); color:var(--t1);
+  border:1px solid var(--bdr2);
+}
+[data-theme="light"] .btn-ghost { background:rgba(0,0,0,.04); color:var(--t1); }
+.btn-ghost:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px); }
+
+/* ── Hero photo panel ── */
+.hero-photos { display:none; }
+
+/* ══════════════════════════════════════
+   TICKER
+══════════════════════════════════════ */
+.mq-wrap {
+  border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr);
+  padding:.75rem 0; overflow:hidden; position:relative; z-index:1;
+}
+.mq { display:flex; animation:marqueeScroll 28s linear infinite; width:max-content; }
+.mq-item {
+  color:var(--t3); font-family:"JetBrains Mono",monospace; font-size:.75rem;
+  font-weight:500; padding:0 1.5rem; white-space:nowrap;
+  display:flex; align-items:center; gap:1.5rem;
+}
+.mq-dot { width:4px; height:4px; border-radius:50%; background:var(--cyan); }

@@ -1,0 +1,79 @@
+/* ============================================================
+   VARIABLES & RESET
+   Design tokens, dark/light theme, font, CSS reset
+   ============================================================ */
+
+/* ══════════════════════════════════════
+   DARK / LIGHT THEME TOKENS
+══════════════════════════════════════ */
+:root, [data-theme="dark"] {
+  --bg:       #06070D;
+  --surface:  #0C0E1A;
+  --card:     #10121F;
+  --card-h:   #151828;
+  --cyan:     #00E5FF;
+  --cyan-dim: rgba(0,229,255,.14);
+  --purple:   #8B5CF6;
+  --amber:    #F59E0B;
+  --emerald:  #10B981;
+  --red:      #EF4444;
+  --pink:     #EC4899;
+  --t1:       #F1F5F9;
+  --t2:       #94A3B8;
+  --t3:       #3F4E63;
+  --bdr:      rgba(255,255,255,.06);
+  --bdr2:     rgba(255,255,255,.10);
+  --bdr3:     rgba(0,229,255,.22);
+  --glass-bg: rgba(6,7,13,.88);
+  --shadow:   0 4px 32px rgba(0,0,0,.5);
+  --glow-cyan:   0 0 28px rgba(0,229,255,.18);
+  --glow-purple: 0 0 28px rgba(139,92,246,.18);
+  --three-opacity: .28;
+}
+
+[data-theme="light"] {
+  --bg:       #F5F7FF;
+  --surface:  #ECEEF8;
+  --card:     #FFFFFF;
+  --card-h:   #F0F2FC;
+  --cyan:     #0088AA;
+  --cyan-dim: rgba(0,136,170,.1);
+  --purple:   #6D28D9;
+  --amber:    #B45309;
+  --emerald:  #047857;
+  --red:      #DC2626;
+  --pink:     #BE185D;
+  --t1:       #0F172A;
+  --t2:       #475569;
+  --t3:       #94A3B8;
+  --bdr:      rgba(0,0,0,.07);
+  --bdr2:     rgba(0,0,0,.12);
+  --bdr3:     rgba(0,136,170,.3);
+  --glass-bg: rgba(245,247,255,.92);
+  --shadow:   0 4px 24px rgba(0,0,0,.1);
+  --glow-cyan:   0 0 20px rgba(0,136,170,.12);
+  --glow-purple: 0 0 20px rgba(109,40,217,.12);
+  --three-opacity: .12;
+}
+
+/* ══════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════ */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg); color: var(--t1);
+  font-family: "Sarabun", sans-serif;
+  overflow-x: hidden; line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background .4s, color .4s;
+}
+h1,h2,h3,h4,.hd { font-family:"Syne",sans-serif; }
+code,.mono { font-family:"JetBrains Mono",monospace; }
+img { display:block; max-width:100%; }
+button { cursor:pointer; font-family:inherit; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--cyan); border-radius:2px; }
+::selection { background:var(--cyan-dim); color:var(--t1); }
+--ease-out: cubic-bezier(0.22,1,0.36,1);

@@ -1,0 +1,101 @@
+/* ============================================================
+   SECTIONS
+   About, Projects, Education, Skills, Vision, Certs, Contact, Footer
+   ============================================================ */
+
+/* ══════════════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════════════ */
+.sec { padding:7rem clamp(1.5rem,6vw,5rem); max-width:1300px; margin:0 auto; position:relative; z-index:1; }
+.sec-divider { border:none; border-top:1px solid var(--bdr); margin:0; }
+.sec-label {
+  font-family:"JetBrains Mono",monospace; font-size:.68rem; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--cyan);
+  margin-bottom:.6rem; display:flex; align-items:center; gap:.7rem;
+}
+.sec-label::before { content:''; width:18px; height:1.5px; background:var(--cyan); }
+.sec-h2 { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.04em; line-height:1.1; margin-bottom:.6rem; }
+.sec-sub { font-size:1rem; color:var(--t2); max-width:520px; margin-bottom:3.5rem; }
+
+/* Scroll reveal */
+.rv { opacity:0; transform:translateY(32px); transition:opacity .75s ease, transform .75s ease; }
+.rv.stagger-1 { transition-delay:.05s; }
+.rv.stagger-2 { transition-delay:.12s; }
+.rv.stagger-3 { transition-delay:.20s; }
+.rv.stagger-4 { transition-delay:.28s; }
+.rv.vis { opacity:1; transform:translateY(0); }
+
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+.about-wrap { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.about-main {
+  grid-column:1/-1; background:var(--card); border:1px solid var(--bdr);
+  border-radius:20px; padding:2.5rem;
+  display:flex; gap:3rem; flex-wrap:wrap; align-items:center;
+  transition:border-color .3s;
+}
+.about-main:hover { border-color:var(--bdr3); }
+.about-story { flex:1; min-width:260px; }
+.about-story h3 { font-family:"Syne",sans-serif; font-size:1.3rem; font-weight:700; margin-bottom:1rem; letter-spacing:-.02em; }
+.about-story p { color:var(--t2); font-size:.92rem; line-height:1.85; }
+.about-hobbies { flex:0 0 280px; display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+.hobby {
+  background:var(--surface); border:1px solid var(--bdr); border-radius:14px;
+  padding:1rem; text-align:center; transition:all .3s; cursor:default;
+}
+.hobby:hover { border-color:var(--cyan); transform:translateY(-3px); }
+.hobby-icon  { font-size:1.5rem; margin-bottom:.4rem; display:block; }
+.hobby-name  { font-size:.78rem; color:var(--t2); font-weight:600; }
+
+/* ══════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════ */
+.proj-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.pc {
+  background:var(--card); border:1px solid var(--bdr); border-radius:24px;
+  overflow:hidden; cursor:pointer;
+  transition:border-color .4s, box-shadow .4s, transform .4s;
+}
+.pc:hover {
+  border-color:var(--bdr3);
+  box-shadow:0 20px 60px rgba(0,0,0,.3), var(--glow-cyan);
+  transform:translateY(-6px);
+}
+.pc-img { height:230px; overflow:hidden; position:relative; background:var(--surface); }
+.pc-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+.pc:hover .pc-img img { transform:scale(1.06); }
+.pc-img.phones {
+  display:flex; justify-content:center; align-items:flex-end;
+  gap:.5rem; padding:1.2rem 1rem 0;
+  background:linear-gradient(145deg,#0D1025,#151835);
+}
+.pc-img.phones img { height:200px; width:auto; border-radius:10px 10px 0 0; box-shadow:0 8px 32px rgba(0,0,0,.6); transition:transform .4s; }
+.pc:hover .pc-img.phones img { transform:translateY(-5px); }
+.pc-overlay {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(6,7,13,.5); opacity:0; transition:opacity .3s;
+}
+.pc:hover .pc-overlay { opacity:1; }
+.pc-overlay span {
+  background:var(--cyan); color:#06070D; padding:10px 24px;
+  border-radius:10px; font-family:"Syne",sans-serif; font-weight:700; font-size:.85rem;
+  transform:translateY(8px); transition:transform .3s ease;
+}
+.pc:hover .pc-overlay span { transform:translateY(0); }
+.pc-body { padding:1.6rem; }
+.pc-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:.8rem; }
+.pc-num  { font-family:"Syne",sans-serif; font-size:1.5rem; font-weight:800; color:var(--t3); opacity:.3; }
+.pc-title { font-family:"Syne",sans-serif; font-size:1.08rem; font-weight:700; letter-spacing:-.02em; margin-bottom:.5rem; line-height:1.3; }
+.pc-desc  { font-size:.85rem; color:var(--t2); line-height:1.75; margin-bottom:1rem; }
+.pc-cat {
+  font-family:"JetBrains Mono",monospace; font-size:.68rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase; padding:4px 12px; border-radius:100px; border:1px solid;
+}
+.cat-ai   { color:var(--purple);  border-color:rgba(139,92,246,.3);  background:rgba(139,92,246,.08); }
+.cat-data { color:var(--amber);   border-color:rgba(245,158,11,.3);  background:rgba(245,158,11,.08); }
+.cat-ux   { color:var(--pink);    border-color:rgba(236,72,153,.3);  background:rgba(236,72,153,.08); }
+.cat-game { color:var(--emerald); border-color:rgba(16,185,129,.3);  background:rgba(16,185,129,.08); }
+.tags  { display:flex; flex-wrap:wrap; gap:.4rem; }
+.tag   { font-family:"JetBrains Mono",monospace; font-size:.65rem; background:var(--surface); color:var(--t3); padding:4px 10px; border-radius:8px; border:1px solid var(--bdr); transition:color .2s; }
+.tag:hover { color:var(--cyan); }
